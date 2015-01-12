@@ -97,6 +97,45 @@ public class Picture extends SimplePicture
             }
         }
     }
+    
+    /** 
+     * Method to set keep blue
+     */
+    public void keepBlue()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                pixelObj.setRed(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+    
+    /**
+     * method to negate all colors
+     */
+    public void negate()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        int red;
+        int blue;
+        int green;
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                red = pixelObj.getRed();
+                blue = pixelObj.getBlue();
+                green = pixelObj.getGreen();
+                pixelObj.setRed(255 - red);
+                pixelObj.setGreen(255 - green);
+                pixelObj.setBlue(255 - blue);
+            }
+        } 
+    }
 
     /** Method that mirrors the picture around a 
      * vertical mirror in the center of the picture
@@ -284,6 +323,11 @@ public class Picture extends SimplePicture
         }
     }
 
+    
+    /**
+     * 
+     */
+    
     /** Main method for testing - each class in Java can have a main 
      * method 
      */

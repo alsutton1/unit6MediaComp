@@ -82,7 +82,28 @@ public class PictureTester
         caterpillar.explore();
     }
     
+    /**
+     * tests keepBlue
+     */
+    public static void testKeepBlue()
+    {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.keepBlue();
+        beach.explore();
+    }
 
+    /**
+     * tests negate
+     */
+    public static void testNegate()
+    {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.negate();
+        beach.explore();
+    }
+    
     /** Main method for testing.  Every class can have a main
      * method in Java */
     public static void main(String[] args)
@@ -102,6 +123,7 @@ public class PictureTester
         //testMirrorArms();
         //testMirrorGull();
         //testMirrorDiagonal();
+        //testMirrorHorizontal();
         //testCollage();
         //testCopy();
         //testEdgeDetection();
