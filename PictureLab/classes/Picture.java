@@ -227,7 +227,7 @@ public class Picture extends SimplePicture
         int width = pixels[0].length;
         for (int row = 0; row < pixels.length; row++)
         {
-            for (int col = 0; col < width/2; col++)
+            for (int col = 0; col < width; col++)
             {
                 leftPixel = pixels[row][width - 1 - col];
                 rightPixel = pixels[row][col];
@@ -255,7 +255,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     /**
      * mirrors the picture diagonally from right to left
      */
@@ -264,14 +264,21 @@ public class Picture extends SimplePicture
         Pixel[][] pixels = this.getPixels2D();
         Pixel leftPixel = null;
         Pixel rightPixel = null;
+        int width = pixels.length;
         int height = pixels.length;
-        int width = pixels[0].length;
-        for (int row = 0; row < height/2; row++)
+        for (int row = 0; row < width; row++)
         {
-            for (int col = 0; col < width/2; col++)
+            for (int col = 0; col < height; col++)
             {
                 leftPixel = pixels[row][col];
-                rightPixel = pixels[height - 1 - row][width - 1 - col];
+                if (row <= col)
+                {
+                    rightPixel = pixels[col][row];
+                }
+                else
+                {
+                    rightPixel = pixels[row][col];
+                }
                 rightPixel.setColor(leftPixel.getColor());
             }
         }
