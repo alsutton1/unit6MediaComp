@@ -97,7 +97,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     /** 
      * Method to set keep blue
      */
@@ -113,7 +113,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     /**
      * method to negate all colors
      */
@@ -135,6 +135,51 @@ public class Picture extends SimplePicture
                 pixelObj.setBlue(255 - blue);
             }
         } 
+    }
+
+    /** 
+     * method to grayscale the picture
+     */
+    public void grayscale()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        int red;
+        int blue;
+        int green;
+        int average;
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                red = pixelObj.getRed();
+                blue = pixelObj.getBlue();
+                green = pixelObj.getGreen();
+                average = (int)((red + blue + green)/3);
+                pixelObj.setRed(average);
+                pixelObj.setGreen(average);
+                pixelObj.setBlue(average);
+            }
+        } 
+    }
+
+    public void underwaterFix()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        int red;
+        int blue;
+        int green;
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                red = pixelObj.getRed()*3;
+                blue = pixelObj.getBlue();
+                green = pixelObj.getGreen();
+                pixelObj.setRed(red);
+                pixelObj.setGreen(green);
+                pixelObj.setBlue(blue);
+            }
+        }
     }
 
     /** Method that mirrors the picture around a 
@@ -304,13 +349,13 @@ public class Picture extends SimplePicture
         Pixel leftPixel = null;
         Pixel rightPixel = null;
         int width = pixels.length;
-        int height = pixels.length;
+        int height = pixels[0].length;
         for (int row = 0; row < width; row++)
         {
             for (int col = 0; col < height; col++)
             {
                 leftPixel = pixels[row][col];
-                if (row <= col)
+                if (row < col && col < 150)
                 {
                     rightPixel = pixels[col][row];
                 }
@@ -322,12 +367,30 @@ public class Picture extends SimplePicture
             }
         }
     }
-
     
     /**
-     * 
+     * copies a section of the picture
      */
-    
+    public void copyPicture(Picture scourcePicture, int startScourceRow, 
+    int endScourceRow, int startScourceCol, int endScourceCol, 
+    int startDestRow, int startDestCol)
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        for (int row = startScourceRow; row <= endScourceRow; row++)
+        {
+            for (int col = startScourceCol; col <= endScourceCol; col++)
+            {
+                leftPixel = pixels[row][col];
+                rightPixel = pixels[startDestRow][startDestCol];
+                rightPixel.setColor(leftPixel.getColor());
+                startDestRow++;
+                startDestCol++;
+            }
+        }
+    }
+
     /** Main method for testing - each class in Java can have a main 
      * method 
      */

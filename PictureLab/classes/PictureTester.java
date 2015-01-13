@@ -104,6 +104,40 @@ public class PictureTester
         beach.explore();
     }
     
+    /**
+     * tests grayscale
+     */
+    public static void testGrayscale()
+    {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.grayscale();
+        beach.explore();
+    }
+    
+    /**
+     * tests underwaterFix
+     */
+    public static void testUnderwaterFix()
+    {
+        Picture water = new Picture("water.jpg");
+        water.explore();
+        water.underwaterFix();
+        water.explore();
+    }
+    
+    /**
+     * tests copyPicture()
+     */
+    public static void testCopyPicture()
+    {
+        Picture beach = new Picture("beach.jpg");
+        Picture beach2 = new Picture("beach.jpg");
+        beach.explore();
+        beach2.copyPicture(beach, 0, 25, 0, 25, 100, 100);
+        beach2.explore();
+    }
+    
     /** Main method for testing.  Every class can have a main
      * method in Java */
     public static void main(String[] args)
