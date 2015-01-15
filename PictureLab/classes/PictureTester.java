@@ -132,10 +132,19 @@ public class PictureTester
     public static void testCopyPicture()
     {
         Picture beach = new Picture("beach.jpg");
-        Picture beach2 = new Picture("beach.jpg");
+        Picture image2 = new Picture("snowman.jpg");
         beach.explore();
-        beach2.copyPicture(beach, 0, 25, 0, 25, 100, 100);
-        beach2.explore();
+        image2.copyPicture(beach, 50, 150, 50, 150, 25, 25);
+        image2.explore();
+    }
+    
+    public static void testScaleByHalf()
+    {
+        Picture beach = new Picture("beach.jpg");
+        Picture newBeach = new Picture();
+        beach.explore();
+        newBeach.scaleByHalf(beach);
+        newBeach.explore();
     }
     
     /** Main method for testing.  Every class can have a main

@@ -367,7 +367,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     /**
      * copies a section of the picture
      */
@@ -378,15 +378,40 @@ public class Picture extends SimplePicture
         Pixel[][] pixels = this.getPixels2D();
         Pixel leftPixel = null;
         Pixel rightPixel = null;
+        int numcol;
+        int numrow = startDestRow;
         for (int row = startScourceRow; row <= endScourceRow; row++)
         {
+            numcol = startDestCol;
             for (int col = startScourceCol; col <= endScourceCol; col++)
             {
+                Pixel compared = new Pixel(scourcePicture, row, col);
                 leftPixel = pixels[row][col];
-                rightPixel = pixels[startDestRow][startDestCol];
-                rightPixel.setColor(leftPixel.getColor());
-                startDestRow++;
-                startDestCol++;
+                rightPixel = pixels[numrow][numcol];
+                rightPixel.setColor(compared.getColor());
+                numcol++;
+            }
+            numrow++;
+        }
+    }
+
+    /**
+     * halves the size of the picture
+     */
+
+    public void scaleByHalf(Picture scourcePicture)
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        for (int row = 0; row < pixels.length/2; row++)
+        {
+            for (int col = 0; col < pixels[0].length/2; col++)
+            {
+                Pixel compare = new Pixel(scourcePicture, row, col);
+                leftPixel = pixels[row][col];
+                    rightPixel = pixels[row/2][col/2];
+                    rightPixel.setColor(compare.getColor());
             }
         }
     }
