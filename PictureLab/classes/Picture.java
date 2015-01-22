@@ -114,6 +114,42 @@ public class Picture extends SimplePicture
         }
     }
 
+    public void keepRed()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                pixelObj.setBlue(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+
+    public void removeWhite()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        int red;
+        int blue;
+        int green;
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                red = pixelObj.getRed();
+                blue = pixelObj.getBlue();
+                green = pixelObj.getGreen();
+                if (red > 240 && blue > 240 && green > 240)
+                {
+                    pixelObj.setRed(0);
+                    pixelObj.setBlue(0);
+                    pixelObj.setGreen(0);
+                }
+            }
+        }
+    }
+
     /**
      * method to negate all colors
      */
@@ -355,7 +391,7 @@ public class Picture extends SimplePicture
             for (int col = 0; col < height; col++)
             {
                 leftPixel = pixels[row][col];
-                if (row < col && col < 150)
+                if (row < col && col < width)
                 {
                     rightPixel = pixels[col][row];
                 }
@@ -385,7 +421,7 @@ public class Picture extends SimplePicture
             numcol = startDestCol;
             for (int col = startScourceCol; col <= endScourceCol; col++)
             {
-                Pixel compared = new Pixel(scourcePicture, row, col);
+                Pixel compared = new Pixel(scourcePicture, col, row);
                 leftPixel = pixels[row][col];
                 rightPixel = pixels[numrow][numcol];
                 rightPixel.setColor(compared.getColor());
@@ -404,14 +440,19 @@ public class Picture extends SimplePicture
         Pixel[][] pixels = this.getPixels2D();
         Pixel leftPixel = null;
         Pixel rightPixel = null;
-        for (int row = 0; row < pixels.length/2; row++)
+        int numrow;
+        int numcol;
+        for (int row = 0; row < pixels.length; row++)
         {
-            for (int col = 0; col < pixels[0].length/2; col++)
+            numrow = row/2;
+            for (int col = 0; col < pixels[0].length; col++)
             {
-                Pixel compare = new Pixel(scourcePicture, row, col);
+                Pixel compare = new Pixel(scourcePicture, col, row);
+                numcol = col/2;
                 leftPixel = pixels[row][col];
-                    rightPixel = pixels[row/2][col/2];
-                    rightPixel.setColor(compare.getColor());
+                rightPixel = pixels[numrow][numcol];
+                rightPixel.setColor(leftPixel.getColor());
+
             }
         }
     }

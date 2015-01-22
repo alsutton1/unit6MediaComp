@@ -141,7 +141,7 @@ public class PictureTester
     public static void testScaleByHalf()
     {
         Picture beach = new Picture("beach.jpg");
-        Picture newBeach = new Picture();
+        Picture newBeach = new Picture(500, 500);
         beach.explore();
         newBeach.scaleByHalf(beach);
         newBeach.explore();
