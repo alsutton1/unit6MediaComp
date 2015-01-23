@@ -140,11 +140,11 @@ public class Picture extends SimplePicture
                 red = pixelObj.getRed();
                 blue = pixelObj.getBlue();
                 green = pixelObj.getGreen();
-                if (red > 240 && blue > 240 && green > 240)
+                if (red > 200 && blue > 200 && green > 200)
                 {
-                    pixelObj.setRed(0);
-                    pixelObj.setBlue(0);
-                    pixelObj.setGreen(0);
+                    pixelObj.setRed(255 - red);
+                    pixelObj.setGreen(255 - green);
+                    pixelObj.setBlue(255 - blue);
                 }
             }
         }
